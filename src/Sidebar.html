@@ -1,0 +1,80 @@
+<ul class="c-toolbar">
+  <li class="c-toolbar__item" on:click="toggle()">
+    <i class="material-icons">menu</i>
+  </li>
+</ul>
+
+<div class="c-sidebar" class:is-open="isOpen">
+  <div class="c-sidebar__header"><h1>Bookapp</h1></div>
+  <div class="c-sidebar__main"></div>
+</div>
+
+<style>
+  .c-toolbar {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 60px;
+    height: 100%;
+    background: white;
+    border-right: 1px solid #eee;
+    list-style-type: none;
+    z-index: 2;
+  }
+
+  .c-toolbar__item {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .c-toolbar__item i {
+    font-style: normal;
+  }
+
+  .c-sidebar {
+    position: absolute;
+    left: -300px;
+    width: 360px;
+    height: 100%;
+    background: white;
+    border-right: 1px solid #eee;
+    z-index: 1;
+  }
+
+  .c-sidebar.is-open {
+    left: 60px;
+  }
+
+  .c-sidebar__header {
+    padding: 20px;
+  }
+
+  .c-sidebar__main {
+    padding: 20px;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        isOpen: false
+      }
+    },
+
+    methods: {
+      toggle() {
+        const { isOpen } = this.get()
+
+        this.set({
+          isOpen: !isOpen
+        })
+      }
+    }
+  }
+</script>
