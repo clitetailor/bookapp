@@ -1,12 +1,25 @@
 <div class="c-layout">
-  <div class="c-layout__header"></div>
+  <div class="c-layout__header"><Navbar></Navbar></div>
 
   <div class="c-layout__sidebar"><Sidebar></Sidebar></div>
 
   <div class="c-layout__main">
     <div class="c-layout__content">
       <div class="c-columns">
-        <div class="c-columns__column"></div>
+        <div class="c-columns__column">
+          {#each schedules as schedule}
+          <div class="c-card">
+            <div class="c-card__content">
+              <p class="c-schedule__title">{schedule.title}</p>
+              <p>
+                {displayTime(schedule.startAt)} -
+                {displayTime(schedule.endAt)}
+              </p>
+              <p>{schedule.tag}</p>
+            </div>
+          </div>
+          {/each}
+        </div>
         <div class="c-columns__column"></div>
       </div>
     </div>
@@ -39,10 +52,12 @@
   .c-layout__content {
     width: 1200px;
     height: 100%;
+    flex: 1 1 auto;
   }
 
   .c-columns {
     display: flex;
+    padding: 20px 0 20px 0;
     margin-left: -50px;
     height: 100%;
   }
@@ -52,14 +67,50 @@
     height: 100%;
     width: 50%;
   }
+
+  .c-card {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+
+  .c-card__content {
+    padding: 20px;
+  }
+
+  .c-schedule__title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
 </style>
 
 <script>
   import Sidebar from './Sidebar'
+  import Navbar from './Navbar'
+
+  import { displayTime } from './helpers/time'
 
   export default {
+    data() {
+      return {
+        schedules: [
+          {
+            title: 'Hello, World!',
+            startAt: new Date(),
+            endAt: new Date(),
+            tag: 'Room 1430'
+          }
+        ]
+      }
+    },
+
+    helpers: {
+      displayTime
+    },
+
     components: {
-      Sidebar
+      Sidebar,
+      Navbar
     }
   }
 </script>
